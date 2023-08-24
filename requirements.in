@@ -1,0 +1,4 @@
+# pip install -r requirements.in
+matplotlib == 3.7.2
+pandas == 0.2.3
+tableone == 0.8.0
