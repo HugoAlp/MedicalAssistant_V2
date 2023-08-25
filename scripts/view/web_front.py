@@ -1,9 +1,16 @@
+import os
+tmp_path = os.getcwd().split("MEDICALASSISTANT_V2")[0]
+target_path = os.path.join(tmp_path, 'MEDICALASSISTANT_V2')
+import sys
+sys.path[:0] = [target_path]
 import streamlit as st
 import pandas as pd
-#import pandas_profiling
-#from streamlit_pandas_profiling import st_profile_report
-#import numpy as np
-
+import ydata_profiling
+from streamlit_pandas_profiling import st_profile_report
+import numpy as np
+from scripts.utils import *
+import seaborn as sns
+import matplotlib.pyplot as plt
 
 st.title('Databradors du futur')
 
@@ -38,11 +45,25 @@ with st.sidebar.form(key ='Form1'):
 
     st.form_submit_button("Submit")
 
+df = pd.read_csv("assets\heart_2020_light.csv")
 
-# df = pd.read_csv("assets\heart_2020_light.csv")
+plots = []
+for column in df.columns:
+    extractedData = df[column]
+    if column in NUM_COLUMNS:
+        plot = plt.hist(extractedData, stat = "count", color = "indianred", alpha = 0.5)
+        plot.set(ylabel = 'Count', title = f'{COLNAMES_DICT[column]}')
+
+        if column == "BMI" : plot.set(xlabel = 'Index')
+        elif column == "SleepTime" : plot.set(xlabel = 'Hours')
+        else : plot.set(xlabel = 'Days since')
+
+        plots.append(plot)
+
+
+
 # pr = df.profile_report()
-
 # st_profile_report(pr)
 
-
+# python -m streamlit run scripts/view/web_front.py
 
