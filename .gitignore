@@ -1,8 +1,3 @@
-# Assets
-assets/export.*
-assets/*.png
-scripts/view/img/*
-
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -82,7 +77,6 @@ target/
 
 # Jupyter Notebook
 .ipynb_checkpoints
-*.ipynb
 
 # IPython
 profile_default/
@@ -133,10 +127,7 @@ venv/
 ENV/
 env.bak/
 venv.bak/
-proj_data/
-localEnv/
-env_projet/
-
+virtualEnv/
 
 # Spyder project settings
 .spyderproject
