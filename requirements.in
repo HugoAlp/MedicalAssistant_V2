@@ -1,0 +1,5 @@
+# Install with pip install -r requirements.in
+pandas==2.0.2
+pymongo==4.3.3
+python-dotenv==1.0.0
+tqdm==4.65.0
