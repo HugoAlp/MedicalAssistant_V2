@@ -2,8 +2,8 @@
 ydata-profiling
 numpy
 pandas
-pandas-profiling
-pydantic-settings
+# pandas-profiling
+# pydantic-settings
 pymongo
 python-dotenv
 streamlit
