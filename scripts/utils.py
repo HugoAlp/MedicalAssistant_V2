@@ -7,9 +7,10 @@ from dotenv import load_dotenv
 from scripts.models.mongo_db_singleton import MongoDBSingleton
 
 # Titres des colonnes du dataset
-ALL_COLL= ['HeartDisease', 'Smoking', 'AlcoholDrinking', 'Stroke', 'DiffWalking',
-               'Sex', 'AgeCategory', 'Race', 'Diabetic', 'PhysicalActivity',
-               'GenHealth', 'Asthma', 'KidneyDisease', 'SkinCancer','BMI', 'PhysicalHealth', 'MentalHealth', 'SleepTime'] 
+ALL_COLL = ['HeartDisease', 'Smoking', 'AlcoholDrinking', 'Stroke', 'DiffWalking',
+            'Sex', 'AgeCategory', 'Race', 'Diabetic', 'PhysicalActivity',
+            'GenHealth', 'Asthma', 'KidneyDisease', 'SkinCancer','BMI', 'PhysicalHealth', 
+            'MentalHealth', 'SleepTime'] 
 
 # Titre des colonnes numériques
 NUM_COLUMNS = ['BMI', 'PhysicalHealth', 'MentalHealth', 'SleepTime']

@@ -125,37 +125,30 @@ categorical = ['HeartDisease', 'Smoking', 'AlcoholDrinking', 'Stroke',
                'SkinCancer']
 
 for i in categorical :
-    if i in ["HeartDisease", "Smoking", "AlcoholDrinking", "Stroke", "DiffWalking", "PhysicalActivity", "Asthma", "KidneyDisease", "SkinCancer"] :
-        data[f'{i}_yes'] = [1 if x == 'Yes' else 0 for x in data[i].tolist()]
-        data[f'{i}_no'] = [1 if x == 'Yes' else 0 for x in data[i].tolist()]
-    elif i == 'Sex' :
-        pass
+    if i in ["HeartDisease", "Smoking", "AlcoholDrinking", "Stroke", "DiffWalking", "Sex", "PhysicalActivity", "Asthma", "KidneyDisease", "SkinCancer"] :
+        data[i] = [1 if x in ['Yes', 'Female'] else 0 for x in data[i].tolist()]
     elif i == 'AgeCategory' :
-        pass
+        for j in range(0, len(data["AgeCategory"])) :
+            if data["AgeCategory"][j] in ["18-24","25-29"] : data["AgeCategory"][j] == "18-29"
+            elif data["AgeCategory"][j] in ["30-34","35-39"] : data["AgeCategory"][j] == "30-39"
+            elif data["AgeCategory"][j] in ["40-44","45-49"] : data["AgeCategory"][j] == "40-49"
+            elif data["AgeCategory"][j] in ["50-54","55-59"] : data["AgeCategory"][j] == "50-59"
+            elif data["AgeCategory"][j] in ["60-64","65-69"] : data["AgeCategory"][j] == "60-69"
+            elif data["AgeCategory"][j] in ["70-74","75-79"] : data["AgeCategory"][j] == "70-79"
+        for j in ["18-29", "30-39", "40-49", "50-59", "60-69", "70-79", "80 or older"] :
+            data[f'{i}_{"_".join(j.split(" "))}'] = [1 if x == j else 0 for x in data[i].tolist()]
     elif i == 'Race' :
-        pass
+        for j in ['American Indian/Alaskan Native', 'Asian', 'Black', 'Hispanic', 'Other', 'White'] :
+            data[f'{i}_{"_".join(j.split(" "))}'] = [1 if x == j else 0 for x in data[i].tolist()]
     elif i == 'Diabetic' :
-        pass
+        for j in ['No', 'No, borderline diabetes', 'Yes', 'Yes (during pregnancy)'] :
+            data[f'{i}_{"_".join(j.split(" "))}'] = [1 if x == j else 0 for x in data[i].tolist()]
     elif i == 'GenHealth' :
-        pass
-    else :
-        pass
+        for j in ['Excellent', 'Fair', 'Good', 'Poor', 'Very good'] :
+            data[f'{i}_{"_".join(j.split(" "))}'] = [1 if x == j else 0 for x in data[i].tolist()]
+data.drop(columns = categorical)    
 
-data['PhysicalHealth_0'] = [1 if x == 0 else 0 for x in data['PhysicalHealth'].tolist()]
-data['PhysicalHealth_1_29'] = [1 if x > 0 and x < 30 else 0 for x in data['PhysicalHealth'].tolist()]
-data['PhysicalHealth_30'] = [1 if x == 30 else 0 for x in data['PhysicalHealth'].tolist()]
-
-data['MentalHealth_0'] = [1 if x == 0 else 0 for x in data['MentalHealth'].tolist()]
-data['MentalHealth_1_29'] = [1 if x > 0 and x < 30 else 0 for x in data['MentalHealth'].tolist()]
-data['MentalHealth_30'] = [1 if x == 30 else 0 for x in data['MentalHealth'].tolist()]
+# data.groupby(['HeartDisease']).size()
+    
 
 
-
-from sklearn.preprocessing import OneHotEncoder
-X = [['Yes', 1], ['No', 0]]
-
-np.array(data['HeartDisease']).OneHotEncoder()
-
-
-one_hot_encoded_data = pd.get_dummies(data, columns = ['HeartDisease'])
-print(one_hot_encoded_data)
