@@ -1,5 +1,8 @@
 # pip install -r requirements.in
-matplotlib == 3.7.2
-pandas
+matplotlib==3.7.2
+pandas==2.0.2
+pymongo==4.3.3
+python-dotenv==1.0.0
 scikit_learn
-tableone == 0.8.0
+tableone==0.8.0
+tqdm==4.65.0
