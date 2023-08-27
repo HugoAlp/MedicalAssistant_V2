@@ -148,3 +148,14 @@ data['PhysicalHealth_30'] = [1 if x == 30 else 0 for x in data['PhysicalHealth']
 data['MentalHealth_0'] = [1 if x == 0 else 0 for x in data['MentalHealth'].tolist()]
 data['MentalHealth_1_29'] = [1 if x > 0 and x < 30 else 0 for x in data['MentalHealth'].tolist()]
 data['MentalHealth_30'] = [1 if x == 30 else 0 for x in data['MentalHealth'].tolist()]
+
+
+
+from sklearn.preprocessing import OneHotEncoder
+X = [['Yes', 1], ['No', 0]]
+
+np.array(data['HeartDisease']).OneHotEncoder()
+
+
+one_hot_encoded_data = pd.get_dummies(data, columns = ['HeartDisease'])
+print(one_hot_encoded_data)
