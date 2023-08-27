@@ -1,6 +1,14 @@
 # Install with pip install -r requirements.in
-pandas==2.0.2
-pymongo==4.3.3
-python-dotenv==1.0.0
-streamlit==1.24.1
-tqdm==4.65.0
+ydata-profiling
+numpy
+pandas
+# pandas-profiling
+# pydantic-settings
+pymongo
+python-dotenv
+streamlit
+streamlit_pandas_profiling
+tqdm
+
+
+
