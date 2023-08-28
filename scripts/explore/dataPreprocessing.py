@@ -61,7 +61,3 @@ for i in ALL_COLL :
         continue
 
 # data.to_excel("assets/transformed_data.xlsx")
-
-# Relancer la transformation
-# Supprimer le to_excel
-# Faire le rapport
