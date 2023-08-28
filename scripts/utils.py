@@ -1,6 +1,6 @@
 import os
-tmp_path = os.getcwd().split("Diginamic_mongo_project")[0]
-target_path = os.path.join(tmp_path, 'Diginamic_mongo_project')
+tmp_path = os.getcwd().split("MedicalAssistant_V2")[0]
+target_path = os.path.join(tmp_path, 'MedicalAssistant_V2')
 import sys
 sys.path[:0] = [target_path]
 from dotenv import load_dotenv
