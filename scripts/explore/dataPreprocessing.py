@@ -6,6 +6,7 @@ def dataPreprocessing() :
     import sys
     from scripts.models import MongoDBSingleton
     from scripts.utils import ALL_COLL
+    from sklearn.preprocessing import StandardScaler
     from tableone import TableOne
 
     """ Accession au singleton """
@@ -59,5 +60,3 @@ def dataPreprocessing() :
             data = data.drop(columns = i)
         else : 
             continue
-
-    return(data)
