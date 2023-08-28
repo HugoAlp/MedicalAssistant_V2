@@ -1,9 +1,17 @@
 # pip install -r requirements.in
 matplotlib==3.7.2
-pandas==2.0.2
-pymongo==4.3.3
-python-dotenv==1.0.0
 scikit_learn
-streamlit==1.24.1
 tableone==0.8.0
-tqdm==4.65.0
+ydata-profiling
+numpy
+pandas
+# pandas-profiling
+# pydantic-settings
+pymongo
+python-dotenv
+streamlit
+streamlit_pandas_profiling
+tqdm
+
+
+
