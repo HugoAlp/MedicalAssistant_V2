@@ -1,12 +1,12 @@
 """ Importation des librairies """
 from scripts.explore.dataPreprocessing import dataPreprocessing
 from sklearn.linear_model import LogisticRegression
-import pandas
+import pandas as pd
 import numpy as np
 from sklearn.model_selection import StratifiedKFold,StratifiedShuffleSplit
 
 """ Importation des données """
-data = dataPreprocessing()
+data = pd.read_csv('assets\nouv_transformed-no_index.csv')
 
 """Définition de X et y"""
 X = data.drop(columns = ['HeartDisease'])
