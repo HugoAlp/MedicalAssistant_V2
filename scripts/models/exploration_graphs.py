@@ -53,8 +53,6 @@ def singleGraphsGeneration(savingPath):
 
                      catFig.savefig(f'{savingPath}/{parameters}.png')
                      print(parameters, "ok")
-
-       # plt.show()
                      
 if __name__ == '__main__':
        singleGraphsGeneration('scripts/view/img')
