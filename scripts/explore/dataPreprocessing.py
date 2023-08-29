@@ -1,4 +1,4 @@
-def dataPreprocessing(data = None) :
+def dataPreprocessing(input = None) :
     """
     Réalise le traitement des données préalable au machine learning.
     Si le paramètre data reste à None, est appliqué à l'ensemble du contenu de la base MongoDB.
@@ -18,7 +18,7 @@ def dataPreprocessing(data = None) :
 
     from scripts.utils import ALL_COLL
 
-    if data is None :
+    if input is None :
         """ Imports des librairies """
         from scripts.models import MongoDBSingleton
 
@@ -29,13 +29,15 @@ def dataPreprocessing(data = None) :
         data = pd.DataFrame(list(db.get_collection("heart").find({}, {'_id' : 0})))
     
     else :
+        data = {key: [val] for key in input.keys() for val in input.values()}
         data = pd.DataFrame.from_dict(data)
 
     """ Transformations """
     for i in ALL_COLL :
         # print(i)
         if i in ['HeartDisease', 'Smoking', 'AlcoholDrinking', 'Stroke', 'DiffWalking', 'Sex', 'PhysicalActivity', 'Asthma', 'KidneyDisease', 'SkinCancer'] :
-            data[i] = [1 if x in ['Yes', 'Male'] else 0 for x in data[i].tolist()]
+            if input is None or i != 'HeartDisease':
+                data[i] = [1 if x in ['Yes', 'Male'] else 0 for x in data[i].tolist()]
         elif i in ['SleepTime', 'BMI']:
             minmaxscaler = MinMaxScaler()
             data[i] = minmaxscaler.fit_transform(data[[i]])

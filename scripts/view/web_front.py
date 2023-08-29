@@ -3,12 +3,12 @@ tmp_path = os.getcwd().split("MEDICALASSISTANT_V2")[0]
 target_path = os.path.join(tmp_path, 'MEDICALASSISTANT_V2')
 import sys
 sys.path[:0] = [target_path]
+from joblib import load
 import streamlit as st
 import pandas as pd
 import numpy as np
 from scripts.utils import *
 import time as t
-from pprint import pprint
 from scripts.explore.dataPreprocessing import dataPreprocessing
 
 def runStat():
@@ -29,9 +29,12 @@ def runStat():
             'PhysicalHealth':st.session_state.S_PhysicalHealth[0],
             'MentalHealth':st.session_state.S_MentalHealth[0],
             'SleepTime':st.session_state.S_Sleep[0]}
-    pprint(result, sort_dicts=False)
-    DF_dataprocess = dataPreprocessing(result)
-    st.dataframe(DF_dataprocess, use_container_width=True)
+    df_dataprocess = dataPreprocessing(result)
+    model = load('scripts/machineLearning/knn_opti.joblib')
+    df_dataprocess = df_dataprocess[model.feature_names_in_]
+    prediction = model.predict(df_dataprocess)
+    st.write(prediction)
+    # st.dataframe(df_dataprocess, use_container_width=True)
 
 res_form ={}
 elementFormNames= {0:'R_heartDisease',1:'R_smoking',3:'R_AlcoholDrinking',2:'R_Stroke',3:'R_DiffWalking',4:'R_Sex',5:'SB_AgeCategory',
