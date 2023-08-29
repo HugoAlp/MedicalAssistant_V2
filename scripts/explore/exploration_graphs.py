@@ -55,6 +55,6 @@ def singleGraphsGeneration(savingPath):
                      print(parameters, "ok")
                      
 if __name__ == '__main__':
-       singleGraphsGeneration('scripts/view/img')
+       singleGraphsGeneration('img/')
 
 
