@@ -1,17 +1,19 @@
 def dataPreprocessing(data = None) :
-
+    
     """ Imports des librairies """
-    import os
     import pandas as pd
+    from sklearn.preprocessing import MinMaxScaler
+
+    """ Localisation dans le répertoire racine """
+    import os
     import sys
+    tmp_path = os.getcwd().split("MedicalAssistant_V2")[0]
+    target_path = os.path.join(tmp_path, 'MedicalAssistant_V2')
+    sys.path[:0] = [target_path]
+
     from scripts.utils import ALL_COLL
 
     if data is None :
-        """ Localisation dans le répertoire racine """
-        tmp_path = os.getcwd().split("MedicalAssistant_V2")[0]
-        target_path = os.path.join(tmp_path, 'MedicalAssistant_V2')
-        sys.path[:0] = [target_path]
-
         """ Imports des librairies """
         from scripts.models import MongoDBSingleton
 
@@ -22,14 +24,11 @@ def dataPreprocessing(data = None) :
         data = pd.DataFrame(list(db.get_collection("heart").find({}, {'_id' : 0})))
     
     else :
-        
         data = pd.DataFrame.from_dict(data)
 
     """ Transformations """
-    from sklearn import preprocessing
-    from sklearn.preprocessing import MinMaxScaler
     for i in ALL_COLL :
-        print(i)
+        # print(i)
         if i in ['HeartDisease', 'Smoking', 'AlcoholDrinking', 'Stroke', 'DiffWalking', 'Sex', 'PhysicalActivity', 'Asthma', 'KidneyDisease', 'SkinCancer'] :
             data[i] = [1 if x in ['Yes', 'Male'] else 0 for x in data[i].tolist()]
         elif i in ['SleepTime', 'BMI']:
@@ -65,13 +64,8 @@ def dataPreprocessing(data = None) :
             dict_remplace[0] = '0'
             dict_remplace[30] = '30'
             data[i] = data[i].map(dict_remplace)
-            # for j in range(0, len(data[i])) :
-            #     if data.loc[j, i] == 0 : data.loc[j, i] = '0'
-            #     elif data.loc[j, i] in list(range(1, 30)) : data.loc[j, i] = '1-29'
-            #     elif data.loc[j, i] == 30 : data.loc[j, i] = '30'
-            #     else : continue
             for j in ['0', '1-29', '30'] :
-                print(j)
+                # print(j)
                 data[f'{i}_{"_".join(j.split(" "))}'] = [1 if x == j else 0 for x in data[i].tolist()]
             data = data.drop(columns = i)
         else : continue
