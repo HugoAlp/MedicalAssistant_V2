@@ -1,41 +1,40 @@
 """ Importation des librairies """
+import numpy as np
+import os
 import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.neighbors import KNeighborsClassifier
 from scripts.explore.dataPreprocessing import dataPreprocessing
-# from sklearn.model_selection import StratifiedShuffleSplit
+import time
 
 """ Importation des données """
 data = dataPreprocessing()
 
-""" Centrage-réduction des données """
-# newdf = pd.DataFrame(scale(data[data.columns[1:len(data.columns)]]), index = data.index, columns = data.columns[1:len(data.columns)])
-
 """ Définition des features et de la target """
-features = data.drop(columns = ['HeartDisease'], axis = 1)
-target = data['HeartDisease']
+X = data.drop(columns = ['HeartDisease'], axis = 1)
+y = data['HeartDisease'].values
 
 """ Split """
-from sklearn.model_selection import StratifiedShuffleSplit
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.25, random_state = 1, stratify = y)
 
-sss = StratifiedShuffleSplit(n_splits = 1, test_size = 0.2, random_state = 29)
-for i, (train_index, test_index) in enumerate(sss.split(features, target)) : sample_indices = test_index.tolist()
-features_sample = features.iloc[sample_indices]
-target_sample = target.iloc[sample_indices]
+""" Optimisation des paramètres """
+from sklearn.model_selection import GridSearchCV
 
+knn = KNeighborsClassifier()
+param_grid = {'n_neighbors': np.arange(1, 50)}
+knn_gscv = GridSearchCV(knn, param_grid, cv = 4).fit(X_train, y_train)
+knn_opti = knn_gscv.best_estimator_
+knn_gscv.best_score_ # 0.915153891867322
 
+""" Prédictions """
+y_pred = knn_opti.predict(X_test)
 
+""" Accuracy """
+from sklearn.metrics import accuracy_score
+acc = accuracy_score(y_test, y_pred) # 0.9156337164942651
 
-from scripts.explore.dataPreprocessing import dataPreprocessing
+""" Sauvegarde du modèle """
+from joblib import dump
+dump(knn_opti, "scripts/machineLearning/knn_opti.joblib")
 
-# for train_index, test_index in sss.split(features, target):
-#     X_train, X_test = features[train_index], features[test_index]
-#     y_train, y_test = target[train_index], target[test_index]
-#     # rf.fit(X_train, y_train)
-#     # pred = rf.predict(X_test)
-#     # scores.append(accuracy_score(y_test, pred))
-# 
-# for train_index in sss.split(features, target):
-#     print(train_index)
-# 
-
-for i in data.columns :
-    print(data[i].value_counts())
+""" Bon modèle qui n'underfit ou n'overfit pas """
