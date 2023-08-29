@@ -1,25 +1,29 @@
-def dataPreprocessing() :
+def dataPreprocessing(data = None) :
 
     """ Imports des librairies """
     import os
     import pandas as pd
     import sys
-    
-
-    """ - """
-    tmp_path = os.getcwd().split("MedicalAssistant_V2")[0]
-    target_path = os.path.join(tmp_path, 'MedicalAssistant_V2')
-    sys.path[:0] = [target_path]
-
-    """ Imports des librairies """
-    from scripts.models import MongoDBSingleton
     from scripts.utils import ALL_COLL
-    
-    """ Création d'une instance """
-    db = MongoDBSingleton.get_instance()
 
-    """ Importation des données """
-    data = pd.DataFrame(list(db.get_collection("heart").find({}, {'_id' : 0})))
+    if data is None :
+        """ Localisation dans le répertoire racine """
+        tmp_path = os.getcwd().split("MedicalAssistant_V2")[0]
+        target_path = os.path.join(tmp_path, 'MedicalAssistant_V2')
+        sys.path[:0] = [target_path]
+
+        """ Imports des librairies """
+        from scripts.models import MongoDBSingleton
+
+        """ Création d'une instance """
+        db = MongoDBSingleton.get_instance()
+
+        """ Importation des données """
+        data = pd.DataFrame(list(db.get_collection("heart").find({}, {'_id' : 0})))
+    
+    else :
+        
+        data = pd.DataFrame.from_dict(data)
 
     """ Transformations """
     from sklearn import preprocessing
@@ -73,7 +77,6 @@ def dataPreprocessing() :
         else : continue
 
     return(data)
-
 
 if __name__ == '__main__':
     data = dataPreprocessing()
