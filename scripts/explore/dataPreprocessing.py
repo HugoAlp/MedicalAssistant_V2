@@ -38,7 +38,7 @@ def dataPreprocessing() :
                              '50-54':'50-59','55-59':'50-59',
                              '60-64':'60-69','65-69':'60-69',
                              '70-74':'70-79','75-79':'70-79'}
-            data['AgeCategory'].map(dict_remplace)
+            data['AgeCategory'] = data['AgeCategory'].map(dict_remplace)
             for j in ['18-29', '30-39', '40-49', '50-59', '60-69', '70-79', '80 or older'] :
                 data[f'{i}_{"_".join(j.split(" "))}'] = [1 if x == j else 0 for x in data[i].tolist()]
             data = data.drop(columns = i)
@@ -60,7 +60,7 @@ def dataPreprocessing() :
             dict_remplace = dict(zip(keys, vals))
             dict_remplace[0] = '0'
             dict_remplace[30] = '30'
-            data[i].map(dict_remplace)
+            data[i] = data[i].map(dict_remplace)
             # for j in range(0, len(data[i])) :
             #     if data.loc[j, i] == 0 : data.loc[j, i] = '0'
             #     elif data.loc[j, i] in list(range(1, 30)) : data.loc[j, i] = '1-29'
