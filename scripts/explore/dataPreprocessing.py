@@ -61,11 +61,17 @@ def dataPreprocessing() :
                 data[f'{i}_{"_".join(j.split(" "))}'] = [1 if x == j else 0 for x in data[i].tolist()]
             data = data.drop(columns = i)
         elif i in ['PhysicalHealth', 'MentalHealth'] :
-            for j in range(0, len(data[i])) :
-                if data.loc[j, i] == 0 : data.loc[j, i] = '0'
-                elif data.loc[j, i] in list(range(1, 30)) : data.loc[j, i] = '1-29'
-                elif data.loc[j, i] == 30 : data.loc[j, i] = '30'
-                else : continue
+            keys = list(range(1,30))
+            vals = ['1-29']*29
+            dict_remplace = dict(zip(keys, vals))
+            dict_remplace[0] = '0'
+            dict_remplace[30] = '30'
+            data[i].map(dict_remplace)
+            # for j in range(0, len(data[i])) :
+            #     if data.loc[j, i] == 0 : data.loc[j, i] = '0'
+            #     elif data.loc[j, i] in list(range(1, 30)) : data.loc[j, i] = '1-29'
+            #     elif data.loc[j, i] == 30 : data.loc[j, i] = '30'
+            #     else : continue
             for j in ['0', '1-29', '30'] :
                 print(j)
                 data[f'{i}_{"_".join(j.split(" "))}'] = [1 if x == j else 0 for x in data[i].tolist()]
