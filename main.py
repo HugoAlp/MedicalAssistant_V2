@@ -6,8 +6,6 @@ os.run("python -m streamlit run scripts/view/web_front.py")
 
 
 
-pd profiling vs autre ?
-
 
 
 

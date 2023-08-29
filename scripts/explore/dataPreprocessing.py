@@ -1,4 +1,9 @@
 def dataPreprocessing(data = None) :
+    """
+    Réalise le traitement des données préalable au machine learning.
+    Si le paramètre data reste à None, est appliqué à l'ensemble du contenu de la base MongoDB.
+    Renvoie un DataFrame traité.
+    """
     
     """ Imports des librairies """
     import pandas as pd
