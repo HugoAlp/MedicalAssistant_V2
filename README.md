@@ -7,7 +7,7 @@ Exploration et Machine Learning sur un jeu de données médicales obtenu sur Kag
 
 Geoffroy Morgane
 Do Yen Phi
-Martel Sebastien 
+Martel Sebastien
 Alpiste Hugo
 
 ## **Features**

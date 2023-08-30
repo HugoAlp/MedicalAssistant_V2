@@ -8,7 +8,7 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 from scripts.utils import *
-import time as t
+import time
 from scripts.explore.dataPreprocessing import dataPreprocessing
 
 def runStat():
@@ -33,7 +33,14 @@ def runStat():
     model = load('scripts/machineLearning/knn_opti.joblib')
     df_dataprocess = df_dataprocess[model.feature_names_in_]
     prediction = model.predict(df_dataprocess)
-    st.write(prediction)
+    with st.spinner(text='In progress'):
+        time.sleep(3) 
+        st.success('Done')
+    if prediction == 0:
+        st.write("D'apres notre étude ce patient n'a pas de prédispotions à une maladie cardiaque" )
+    else:
+        st.write("D'apres notre étude ce patient peut avoir des prédispotions à une maladie cardiaque" )
+    #st.write(prediction)
     # st.dataframe(df_dataprocess, use_container_width=True)
 
 res_form ={}
