@@ -57,6 +57,10 @@ This deploys the data in the MongoDB base.
 ```sh
 python -m streamlit run MEDICAL_ASSISTANT.py
 ```
+![Alt text](a481c866-c98d-408b-b2c1-de7efcbea95e.jpg)
+
+press enter to skip this step
+
 **The application will launch and you can now use it.**
 Fill up the patient's data, submit and get the prediction.
 
@@ -119,3 +123,28 @@ The project utilizes the following data attributes:
 - **Kidney disease:** Indicates if respondents have ever been diagnosed with kidney disease, excluding kidney stones, bladder infections, or incontinence
 
 - **Skin cancer:** Determines if respondents have ever been told they had skin cancer
+---
+## **Project structure**
+
+
+
+- MEDICAL_ASSISTANT.py **(Source code of web app)**
+
+- requirements.in **(Listing all Python dependencies for this project)**
+
+- setup.py **(build mongo database and )**
+
+- assets **(Contain data's csv )**
+
+- scripts **(contain project's scripts)**
+  - explore **(exploratory analysis )**
+    - img **(Gaphs generated in png)**
+    - dataPreprocessing.py
+    - devScript.py
+    - exploration_graphs.py
+  - machineLearning **(contain machine learnig's scripts)**
+    - knn.py
+    - logReg.py
+    - randomForest.py
+  - models **(Database connexion)**
+  - utils.py **(recurent functions and variable needed on project)**
