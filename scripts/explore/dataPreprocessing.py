@@ -4,7 +4,7 @@ def dataPreprocessing(input = None) :
     Si le paramètre data reste à None, est appliqué à l'ensemble du contenu de la base MongoDB.
     Renvoie un DataFrame traité.
     """
-    
+
     """ Imports des librairies """
     import pandas as pd
     from sklearn.preprocessing import MinMaxScaler
@@ -27,7 +27,7 @@ def dataPreprocessing(input = None) :
 
         """ Importation des données """
         data = pd.DataFrame(list(db.get_collection("heart").find({}, {'_id' : 0})))
-    
+
     else :
         data = {key: [val] for key in input.keys() for val in input.values()}
         data = pd.DataFrame.from_dict(data)
