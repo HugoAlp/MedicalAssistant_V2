@@ -4,7 +4,7 @@ Nouvelle version du projet Diginamic MedicalAssistant: https://github.com/HugoAl
 Cette fois-ci, exploration et Machine Learning sur ce jeu de données médicales obtenu sur Kaggle:
 https://www.kaggle.com/datasets/kamilpytlak/personal-key-indicators-of-heart-disease
 
-Le but sera de prédire, sur la saisie d'une liste de critères médicaux, si le patient présente un risque de maladie cardiaque ou non.
+Le but sera de prédire, sur la saisie d'une liste de critères médicaux, si le patient est prédisposé à être touché d'une maladie cardiaque ou non.
 
 ## **Authors**
 
