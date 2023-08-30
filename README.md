@@ -1,7 +1,10 @@
 # **MedicalAssistant_V2**
 Nouvelle version du projet Diginamic MedicalAssistant: https://github.com/HugoAlp/Diginamic_mongo_project.git
 
-Exploration et Machine Learning sur un jeu de données médicales obtenu sur Kaggle.
+Cette fois-ci, exploration et Machine Learning sur ce jeu de données médicales obtenu sur Kaggle:
+https://www.kaggle.com/datasets/kamilpytlak/personal-key-indicators-of-heart-disease
+
+Le but sera de prédire, sur la saisie d'une liste de critères médicaux, si le patient est prédisposé à être touché d'une maladie cardiaque ou non.
 
 ## **Authors**
 
@@ -10,15 +13,11 @@ Do Yen Phi
 Martel Sebastien
 Alpiste Hugo
 
-## **Features**
-
-- Runs on Windows
-
----
-
 ## **Configuration**
 
 **Requirements:**
+
+- The application runs on Windows 10+
 
 - An installation of **MongoDB** **(version 3.4.0 or above)** is required to use _MedicalAssistant_. The **MongoDB** installation can be downloaded from https://www.mongodb.com/docs/manual/installation/
 - **python** **(version 3.6 or above)** is also required to access _MedicalAssistant_. If your system does not have a **python** distribution, it can be downloaded from https://www.python.org/downloads/.
@@ -49,10 +48,17 @@ git clone https://github.com/HugoAlp/MedicalAssistant_V2.git
 pip install -r requirements.in
 ```
 
-- Run the setup.py
-- Run the main.py
-
+- Run the setup:
+```sh
+python -m setup.py
+```
+This deploys the data in the MongoDB base.
+- Launch the application:
+```sh
+python -m streamlit run MEDICAL_ASSISTANT.py
+```
 **The application will launch and you can now use it.**
+Fill up the patient's data, submit and get the prediction.
 
 ---
 
